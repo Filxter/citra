@@ -4,6 +4,8 @@ add_library(audio_core STATIC
     codec.h
     dsp_interface.cpp
     dsp_interface.h
+    hle/adts.h
+    hle/adts_reader.cpp
     hle/common.h
     hle/decoder.cpp
     hle/decoder.h
@@ -27,7 +29,8 @@ add_library(audio_core STATIC
 
     $<$<BOOL:${SDL2_FOUND}>:sdl2_sink.cpp sdl2_sink.h>
     $<$<BOOL:${ENABLE_CUBEB}>:cubeb_sink.cpp cubeb_sink.h>
-    $<$<BOOL:${FFMPEG_FOUND}>:hle/aac_decoder.cpp hle/aac_decoder.h hle/ffmpeg_dl.cpp hle/ffmpeg_dl.h>
+    $<$<BOOL:${FFMPEG_FOUND}>:hle/ffmpeg_decoder.cpp hle/ffmpeg_decoder.h hle/ffmpeg_dl.cpp hle/ffmpeg_dl.h>
+    $<$<BOOL:${ENABLE_MF}>:hle/wmf_decoder.cpp hle/wmf_decoder.h hle/wmf_decoder_utils.cpp hle/wmf_decoder_utils.h>
 )
 
 create_target_directory_groups(audio_core)
@@ -41,7 +44,12 @@ if(FFMPEG_FOUND)
     else()
         target_include_directories(audio_core PRIVATE ${FFMPEG_DIR}/include)
     endif()
-    target_compile_definitions(audio_core PRIVATE HAVE_FFMPEG)
+    target_compile_definitions(audio_core PUBLIC HAVE_FFMPEG)
+endif()
+
+if(ENABLE_MF)
+    target_link_libraries(audio_core PRIVATE mf.lib mfplat.lib mfuuid.lib)
+    target_compile_definitions(audio_core PUBLIC HAVE_MF)
 endif()
 
 if(SDL2_FOUND)
