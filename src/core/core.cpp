@@ -16,6 +16,7 @@
 #include "core/cheats/cheats.h"
 #include "core/core.h"
 #include "core/core_timing.h"
+#include "core/dumping/backend.h"
 #include "core/gdbstub/gdbstub.h"
 #include "core/hle/kernel/client_port.h"
 #include "core/hle/kernel/kernel.h"
@@ -270,6 +271,14 @@ const Cheats::CheatEngine& System::CheatEngine() const {
     return *cheat_engine;
 }
 
+VideoDumper::Backend& System::VideoDumper() {
+    return *video_dumper;
+}
+
+const VideoDumper::Backend& System::VideoDumper() const {
+    return *video_dumper;
+}
+
 void System::RegisterSoftwareKeyboard(std::shared_ptr<Frontend::SoftwareKeyboard> swkbd) {
     registered_swkbd = std::move(swkbd);
 }
@@ -297,6 +306,10 @@ void System::Shutdown() {
     cpu_core.reset();
     timing.reset();
     app_loader.reset();
+
+    if (video_dumper->IsDumping()) {
+        video_dumper->StopDumping();
+    }
 
     if (auto room_member = Network::GetRoomMember().lock()) {
         Network::GameInfo game_info{};
