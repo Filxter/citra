@@ -79,6 +79,8 @@ add_executable(citra-qt
     debugger/wait_tree.cpp
     debugger/wait_tree.h
     discord.h
+    dumping_progress_dialog.cpp
+    dumping_progress_dialog.h
     game_list.cpp
     game_list.h
     game_list_p.h
