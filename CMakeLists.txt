@@ -21,13 +21,11 @@ option(ENABLE_WEB_SERVICE "Enable web services (telemetry, etc.)" ON)
 option(ENABLE_CUBEB "Enables the cubeb audio backend" ON)
 
 option(ENABLE_FFMPEG "Enable FFmpeg decoder/encoder" OFF)
+CMAKE_DEPENDENT_OPTION(CITRA_USE_BUNDLED_FFMPEG "Download bundled FFmpeg binaries" ON "ENABLE_FFMPEG;MSVC" OFF)
 
 option(USE_DISCORD_PRESENCE "Enables Discord Rich Presence" OFF)
 
 CMAKE_DEPENDENT_OPTION(ENABLE_MF "Use Media Foundation decoder" ON "WIN32;NOT ENABLE_FFMPEG" OFF)
-
-option(ENABLE_FFMPEG "Enables FFmpeg video dumping support" OFF)
-CMAKE_DEPENDENT_OPTION(CITRA_USE_BUNDLED_FFMPEG "Download bundled FFmpeg binaries" ON "ENABLE_FFMPEG;MSVC" OFF)
 
 if(NOT EXISTS ${PROJECT_SOURCE_DIR}/.git/hooks/pre-commit)
     message(STATUS "Copying pre-commit hook")
