@@ -22,13 +22,9 @@ dylibbundler -b -x "${REV_NAME}/citra" -cd -d "${REV_NAME}/libs" -p "@executable
 
 # TODO(merry): Figure out why these libraries are not automatically processed
 install_name_tool -change /usr/local/Cellar/ffmpeg/4.1_6/lib/libavutil.56.dylib @executable_path/../Frameworks/libavutil.56.dylib "${REV_NAME}/citra-qt.app/Contents/Frameworks/libavcodec.58.dylib"
-install_name_tool -change /usr/local/Cellar/ffmpeg/4.1_6/lib/libavutil.56.dylib @executable_path/../Frameworks/libavutil.56.dylib "${REV_NAME}/citra-qt.app/Contents/Frameworks/libavformat.58.dylib"
 install_name_tool -change /usr/local/Cellar/ffmpeg/4.1_6/lib/libavutil.56.dylib @executable_path/../Frameworks/libavutil.56.dylib "${REV_NAME}/citra-qt.app/Contents/Frameworks/libswresample.3.dylib"
-install_name_tool -change /usr/local/Cellar/ffmpeg/4.1_6/lib/libavutil.56.dylib @executable_path/../Frameworks/libavutil.56.dylib "${REV_NAME}/citra-qt.app/Contents/Frameworks/libswscale.5.dylib"
 install_name_tool -change /usr/local/Cellar/ffmpeg/4.1_6/lib/libavutil.56.dylib @executable_path/libs/libavutil.56.dylib "${REV_NAME}/libs/libavcodec.58.dylib"
-install_name_tool -change /usr/local/Cellar/ffmpeg/4.1_6/lib/libavutil.56.dylib @executable_path/libs/libavutil.56.dylib "${REV_NAME}/libs/libavformat.58.dylib"
 install_name_tool -change /usr/local/Cellar/ffmpeg/4.1_6/lib/libavutil.56.dylib @executable_path/libs/libavutil.56.dylib "${REV_NAME}/libs/libswresample.3.dylib"
-install_name_tool -change /usr/local/Cellar/ffmpeg/4.1_6/lib/libavutil.56.dylib @executable_path/libs/libavutil.56.dylib "${REV_NAME}/libs/libswscale.5.dylib"
 install_name_tool -change /usr/local/Cellar/libvorbis/1.3.6/lib/libvorbis.0.dylib @executable_path/libs/libavutil.56.dylib "${REV_NAME}/libs/libvorbisenc.2.dylib"
 
 # Make the citra-qt.app application launch a debugging terminal.

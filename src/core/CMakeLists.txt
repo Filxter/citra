@@ -442,7 +442,7 @@ add_library(core STATIC
     tracer/recorder.h
 )
 
-if (ENABLE_FFMPEG)
+if (ENABLE_FFMPEG_FRAME_DUMPING)
     target_sources(core PRIVATE
         dumping/ffmpeg_backend.cpp
         dumping/ffmpeg_backend.h
@@ -468,6 +468,6 @@ if (ARCHITECTURE_x86_64)
     target_link_libraries(core PRIVATE dynarmic)
 endif()
 
-if (ENABLE_FFMPEG)
+if (ENABLE_FFMPEG_FRAME_DUMPING)
     target_link_libraries(core PRIVATE FFmpeg::avcodec FFmpeg::avformat FFmpeg::swscale FFmpeg::swresample FFmpeg::avutil)
 endif()

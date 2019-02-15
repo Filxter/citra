@@ -21,6 +21,7 @@ option(ENABLE_WEB_SERVICE "Enable web services (telemetry, etc.)" ON)
 option(ENABLE_CUBEB "Enables the cubeb audio backend" ON)
 
 option(ENABLE_FFMPEG "Enable FFmpeg decoder/encoder" OFF)
+CMAKE_DEPENDENT_OPTION(ENABLE_FFMPEG_FRAME_DUMPING "Enable FFmpeg frame dumping" OFF "ENABLE_FFMPEG" OFF)
 CMAKE_DEPENDENT_OPTION(CITRA_USE_BUNDLED_FFMPEG "Download bundled FFmpeg binaries" ON "ENABLE_FFMPEG;MSVC" OFF)
 
 option(USE_DISCORD_PRESENCE "Enables Discord Rich Presence" OFF)
@@ -275,7 +276,9 @@ if (ENABLE_FFMPEG)
         message(FATAL_ERROR "Found version for libavcodec is too low. The required version is at least 57.48.101 (included in FFmpeg 3.1 and later).")
     endif()
 
-    add_definitions(-DENABLE_FFMPEG)
+    if (ENABLE_FFMPEG_FRAME_DUMPING)
+        add_definitions(-DENABLE_FFMPEG_FRAME_DUMPING)
+    endif()
 endif()
 
 # Platform-specific library requirements

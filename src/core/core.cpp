@@ -17,7 +17,7 @@
 #include "core/core.h"
 #include "core/core_timing.h"
 #include "core/dumping/backend.h"
-#ifdef ENABLE_FFMPEG
+#ifdef ENABLE_FFMPEG_FRAME_DUMPING
 #include "core/dumping/ffmpeg_backend.h"
 #endif
 #include "core/gdbstub/gdbstub.h"
@@ -217,7 +217,7 @@ System::ResultStatus System::Init(EmuWindow& emu_window, u32 system_mode) {
         return result;
     }
 
-#ifdef ENABLE_FFMPEG
+#ifdef ENABLE_FFMPEG_FRAME_DUMPING
     video_dumper = std::make_unique<VideoDumper::FFmpegBackend>();
 #else
     video_dumper = std::make_unique<VideoDumper::NullBackend>();
