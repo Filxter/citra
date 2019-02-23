@@ -98,8 +98,8 @@ private:
 
     // Whether prepare/cleanup video dumping has been requested.
     // They will be executed on next frame.
-    std::atomic_bool prepare_video_dumping;
-    std::atomic_bool cleanup_video_dumping;
+    std::atomic_bool prepare_video_dumping = false;
+    std::atomic_bool cleanup_video_dumping = false;
 
     // PBOs used to dump frames faster
     std::array<OGLBuffer, 2> frame_dumping_pbos;
