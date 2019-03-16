@@ -1019,7 +1019,7 @@ void NWM_UDS::SendTo(Kernel::HLERequestContext& ctx) {
     u8 flags = rp.Pop<u8>();
 
     // There should never be a dest_node_id of 0
-    ASSERT(dest_node_id != 0);
+    //ASSERT(dest_node_id != 0);
 
     std::vector<u8> input_buffer = rp.PopStaticBuffer();
     ASSERT(input_buffer.size() >= data_size);
