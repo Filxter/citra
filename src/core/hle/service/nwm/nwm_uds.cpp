@@ -461,7 +461,7 @@ void NWM_UDS::HandleDeauthenticationFrame(const Network::WifiPacket& packet) {
     auto node_it = std::find_if(node_info.begin(), node_info.end(), [&node](const NodeInfo& info) {
         return info.network_node_id == node.node_id;
     });
-    ASSERT(node_it != node_info.end());
+    //ASSERT(node_it != node_info.end());
 
     connection_status.node_bitmask &= ~(1 << (node.node_id - 1));
     connection_status.changed_nodes |= 1 << (node.node_id - 1);
@@ -971,7 +971,7 @@ void NWM_UDS::SendTo(Kernel::HLERequestContext& ctx) {
     u8 flags = rp.Pop<u8>();
 
     // There should never be a dest_node_id of 0
-    ASSERT(dest_node_id != 0);
+    //ASSERT(dest_node_id != 0);
 
     std::vector<u8> input_buffer = rp.PopStaticBuffer();
     ASSERT(input_buffer.size() >= data_size);
